@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {useRoutes} from './routes'
 
 function App() {
-  const routes = useRoutes( {isAuthenticated : true} )
+  const routes = useRoutes( {isAuthenticated : false} )
   return (
     <Router>
       <div className="container">
