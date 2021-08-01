@@ -1,1 +1,9 @@
-@import 'bootstrap/dist/css/bootstrap.min.css'
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.message{
+    text-align: center;
+    color: orangered;
+    border: 1px solid orangered;
+    border-radius: 10px;
+
+}

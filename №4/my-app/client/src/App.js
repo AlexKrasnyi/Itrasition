@@ -1,12 +1,17 @@
 import React from "react"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {useRoutes} from './routes'
 
 function App() {
+  const routes = useRoutes( {isAuthenticated : true} )
   return (
-    <div className="container">
-      <h1 >Hello World</h1>
-    </div>
+    <Router>
+      <div className="container">
+        {routes}
+      </div>
+    </Router>
   );
 }
 
-export default App;
+export default App

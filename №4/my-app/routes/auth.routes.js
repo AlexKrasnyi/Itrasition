@@ -2,18 +2,20 @@ const { Router } = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+var cors = require('cors')
 const router = Router()
 
 const jwtSecret = 'myApp'
 // /auth/register
 router.post('/register', async (req, res) => {
     try{
-        const {email, password} = req.baseUrl
+        const {email, password} = req.body
 
         const newPeople = await User.findOne({email})
+    
 
         if(newPeople){
-            return res.status(400).json({message: `User ${ email} already exist`  })
+            return res.status(400).json({message: `User ${ email} already exist`})
         }
 
         const cryptPasword = await bcrypt.hash(password, 12)
@@ -22,7 +24,7 @@ router.post('/register', async (req, res) => {
         await user.save()
         res.status(201).json({message: 'user created'})
     }catch(e) {
-        res.status(500).json({message: `Error: ${e.message}`})
+        res.status(501).json({message: `Error: ${e.message}`})
     }
 })
 
@@ -37,6 +39,7 @@ router.post('/login', async (req, res) => {
         }
 
         const isTruePasword = await bcrypt.compare(password, user.password) 
+        console.log('isTruePasword', isTruePasword)
         if(!isTruePasword) {
             res.status(400).json({message : 'wrong password'})
         }
@@ -47,7 +50,7 @@ router.post('/login', async (req, res) => {
             {expiresIn: '1h'}
         )
 
-        res
+        res.json({token, UserId: user.id})
     }catch(e) {
         res.status(500).json({message: `Error: ${e.message}`})
     }
