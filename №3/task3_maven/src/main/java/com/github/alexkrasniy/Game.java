@@ -35,7 +35,6 @@ public class Game {
         }
         System.out.println(0 + " - exit");
 
-        // getting player move from console
         int playerMoveNumber = -1;
         while (playerMoveNumber < 0) {
             System.out.print("Enter your move: ");
@@ -66,15 +65,7 @@ public class Game {
         }
 
         int half = length / 2;
-        // 1 2 3 4 5
-        // 2 1  (2-1) =  1 true
-        // 3 1  (3-1) =  2 true
-        // 4 1  (4-1) =  3 false
-        // 5 1  (5-1) =  4 false
-        // 1 5  (1-5) = -4 true
-        // 1 4  (1-4) = -3 true
-        // 1 3  (1-3) = -2 false
-        // 1 2  (1-2) = -1 false
+ 
         int difference = playerMove - computerMove;
         if ((difference < 0 && Math.abs(difference) > half)
             || (difference > 0 && Math.abs(difference) <= half)) {
